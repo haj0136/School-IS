@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person extends SchoolEntity implements Serializable {
+public abstract class Person extends SchoolEntity implements Serializable {
 	
 	/**
 	 * 
