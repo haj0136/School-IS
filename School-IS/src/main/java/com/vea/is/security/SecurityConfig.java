@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,39 +17,33 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	UserDetailsService userDetailsService;
 
     @Autowired
     public void init(AuthenticationManagerBuilder builder) throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        PasswordEncoder encoder = getPasswordEncoder();
         builder.inMemoryAuthentication().withUser("marek").password(encoder.encode("test")).roles("ADMIN").and()
                 .withUser("user").password(encoder.encode("test")).roles("USER");
-        builder.authenticationProvider(new AuthenticationProvider() {
-
-            @Override
-            public boolean supports(Class<?> authentication) {
-                return authentication.equals(UsernamePasswordAuthenticationToken.class);
-            }
-
-            @Override
-            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                String name = authentication.getName();
-                String password = authentication.getCredentials() != null ? authentication.getCredentials().toString()
-                        : null;
-                if (name.startsWith("a") && password != null) {
-                    List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-                    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    return new UsernamePasswordAuthenticationToken(name, password, authorities);
-                }
-                throw new AuthenticationServiceException("Jmeno musi zacinat na a");
-            }
-        });
     }
+    
+    /*
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	//auth.userDetailsService(userDetailsService);
+    	
+    }
+    
+    */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -61,4 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and().logout().permitAll().invalidateHttpSession(true)
             .logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/403");
     }
+    
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {return PasswordEncoderFactories.createDelegatingPasswordEncoder();}
 }

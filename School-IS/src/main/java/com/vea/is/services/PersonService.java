@@ -1,9 +1,13 @@
 package com.vea.is.services;
 
+import org.aspectj.weaver.patterns.PerSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vea.is.entities.Person;
@@ -17,7 +21,11 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public Person save(Person person) {
+		person.setPassword(passwordEncoder.encode(person.getPassword()));
 		return personRepository.save(person);
 	}
 	
@@ -33,15 +41,11 @@ public class PersonService {
 		personRepository.delete(person);
 	}
 	
-	public Person findByLoginAndPassword(String login, String password) {
-		List<Person> persons = personRepository.findByLoginNameAndPassword(login, password);
+	public Person findByLogin(String login) {
+		Optional<Person> op = personRepository.findByLoginName(login);
 		
-		
-		if(persons != null && !persons.isEmpty()) {
-			if(persons.size() > 1) {
-				log.warn("More users with same name and password !!");
-			}
-			return persons.get(0);
+		if(op.isPresent()) {
+			return op.get();
 		} else {
 			return null;
 		}

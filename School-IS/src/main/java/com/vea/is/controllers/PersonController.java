@@ -51,22 +51,6 @@ public class PersonController {
 		return "add-teacher";
 	}
 	
-	@Secured("ROLE_ADMIN")
-	@PostMapping("/adduser")
-    public String addUser(@Valid Person person, BindingResult result, Model model, HttpServletResponse response) {
-        if (result.hasErrors()) {
-            return "add-person";
-        }
-         
-        personService.save(person);
-        model.addAttribute("persons", personService.findAll());
-        try {
-            response.sendRedirect("/");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return "index";
-    }
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/addstudent")
