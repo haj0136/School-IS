@@ -11,7 +11,7 @@ import com.vea.is.services.PersonService;
 
 @Service
 public class UserSecurityService implements UserDetailsService {
-	
+
 	@Autowired
 	PersonService personService;
 
@@ -21,7 +21,7 @@ public class UserSecurityService implements UserDetailsService {
 		if(user != null) {
 			return new UserInfo(user);
 		} else {
-			throw new UsernameNotFoundException("Username: " + username + " not found!");
+			throw new UsernameNotFoundException("Username: " + username + " does not exist!");
 		}
 	}
 

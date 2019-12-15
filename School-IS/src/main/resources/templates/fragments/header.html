@@ -1,42 +1,46 @@
-<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<header th:fragment="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<!-- Static navbar -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-4">
-		<a class="navbar-brand" href="/">School information system</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-4 shadow">
+		<a class="navbar-brand font-weight-normal" href="/">School information system</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavDropdown-3"
-			aria-controls="navbarNavDropdown-3" aria-expanded="false"
+			data-target="#navbarNavDropdown"
+			aria-controls="navbarNavDropdown" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown-3">
+		<div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Home
+				<li class="nav-item" th:classappend="${#request.getServletPath() == '/' ? 'active' : ''}"><a class="nav-link" href="/">Home
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="https://designrevision.com"
-					id="navbarDropdownMenuLink-3" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">Services</a>
+				<li class="nav-item dropdown" th:classappend="${pplActiveSettings}"><a
+					class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdownMenuLink" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">Users</a>
 					<div class="dropdown-menu"
-						aria-labelledby="navbarDropdownMenuLink-3">
-						<a class="dropdown-item" href="#">Design</a> <a
-							class="dropdown-item" href="#">Development</a> <a
-							class="dropdown-item" href="#">Marketing</a>
+						aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" th:classappend="${#request.getServletPath() == '/persons' ? 'active' : ''}" href="/persons">People</a>
+						<a class="dropdown-item" th:classappend="${#request.getServletPath() == '/students' ? 'active' : ''}" href="/students">Students</a> <a
+							class="dropdown-item" th:classappend="${#request.getServletPath() == '/teachers' ? 'active' : ''}" href="/teachers">Teachers</a>
 					</div></li>
+				<li class="nav-item" th:classappend="${subjectsActiveSettings}"><a class="nav-link" href="/subjects">Subjects</a></li>
 			</ul>
 			<ul class="navbar-nav">
+				<li class="nav-item dropdown"><a class="nav-link text-white dropdown-toggle"
+					href="#" th:text="${#authentication.principal.realName}" data-toggle="dropdown">User name</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-2">
+					<a class="dropdown-item" href="/logout">Logout</a>
+					</div>
+					</li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fa fa-twitter"></i></a></li>
+						class="fab fa-twitter"></i></a></li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fa fa-twitter"></i></a></li>
+						class="fab fa-facebook"></i></a></li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fa fa-facebook"></i></a></li>
+						class="fab fa-linkedin"></i></a></li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fa fa-linkedin"></i></a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fa fa-github"></i></a></li>
+						class="fab fa-github"></i></a></li>
 			</ul>
 		</div>
 	</nav>

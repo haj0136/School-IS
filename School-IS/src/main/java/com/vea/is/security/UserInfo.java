@@ -1,7 +1,6 @@
 package com.vea.is.security;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,28 +13,30 @@ import com.vea.is.entities.Student;
 import com.vea.is.entities.Teacher;
 
 public class UserInfo implements UserDetails {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 4738785789329697988L;
-	
+
 	private String userName;
 	private String password;
 	private List<GrantedAuthority> authorities;
+	private String realName;
 
 	public UserInfo(Person user) {
 		authorities = new ArrayList<>();
 		this.userName = user.getLoginName();
 		this.password = user.getPassword();
-		
+		this.realName = user.getName() + " " + user.getSurname();
+
 		if(user instanceof Teacher) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		} else if (user instanceof Student) {
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		}
 	}
-	
+
 	public UserInfo() {
 	}
 
@@ -72,6 +73,10 @@ public class UserInfo implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String getRealName() {
+		return realName;
 	}
 
 }

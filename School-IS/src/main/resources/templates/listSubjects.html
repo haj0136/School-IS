@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Subjects</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div layout:fragment="content" th:switch="${subjects}" class="container my-5">
+            <div class="row">
+                <div class="col-md-11">
+                    <h2 th:case="null">No subjects yet!</h2>
+                    <div th:case="*">
+                        <h2 class="my-5">Subjects</h2>
+                        <table class="table table-striped table-responsive-md">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Credit</th>
+                                    <th>Optional</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="sub : ${subjects}">
+                                    <td th:text="${sub.name}"></td>
+                                    <td th:text="${sub.code}"></td>
+                                    <td th:text="${sub.credits}"></td>
+                                    <td th:text="${sub.optionality}"></td>
+                                    <td><a th:href="@{/edit/{id}(id=${sub.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a th:href="@{/delete/{id}(id=${sub.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-times ml-2"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>      
+                    <p class="my-5"><a href="/signup" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

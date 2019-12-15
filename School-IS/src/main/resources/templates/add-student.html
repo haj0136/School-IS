@@ -28,42 +28,50 @@
     <h2 class="mb-5">New Student</h2>
     <div class="row">
       <div class="col-md-6">
-        <form action="#" th:action="@{/addstudent}" th:object="${student}" method="post">
+        <form action="#" th:action="@{/students/add}" th:object="${student}" method="post">
           <div id="alert" class="alert alert-warning alert-dismissible fade show"
-            role="alert" th:if="${#fields.hasErrors('name')}">
+            role="alert" th:if="${#fields.hasErrors('*')}">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <span th:errors="*{name}" class="text-danger" style="padding-left: 10px;"></span>
+            <ul style="padding-left: 10px;">
+  				<li th:each="err : ${#fields.errors('*')}" th:text="${err}" class="text-danger">Input is incorrect</li>
+			</ul>
           </div>
           <div class="row">
+              <input type="hidden" th:field="*{id}" class="form-control" placeholder="Id">
             <div class="form-group col-md-6">
-              <label for="name" class="col-form-label">Name</label> <input type="text"
-                th:field="*{name}" class="form-control" id="name" placeholder="Name">
+              <label for="name" class="col-form-label">Name</label>
+              <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name" th:errorclass="is-invalid" required="true">
             </div>
             <div class="form-group col-md-6">
-              <label for="email" class="col-form-label">Email</label> <input type="email"
-                th:field="*{email}" class="form-control" id="email" placeholder="Email">
-              <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                class="text-danger"></span>
+              <label for="surname" class="col-form-label">Surname</label>
+              <input type="text" th:field="*{surname}" class="form-control" id="surname" placeholder="Surname" th:errorclass="is-invalid">
             </div>
             <div class="form-group col-md-6">
-              <label for="loginName" class="col-form-label">Login Name</label> <input type="text"
-                th:field="*{loginName}" class="form-control" id="loginName" placeholder="Login name">
+              <label for="email" class="col-form-label">Email</label>
+              <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Email" th:errorclass="is-invalid">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="loginName" class="col-form-label">Login name</label> <input type="text"
+                th:field="*{loginName}" class="form-control" id="loginName" placeholder="Login name" th:errorclass="is-invalid" required="true">
             </div>
             <div class="form-group col-md-6">
               <label for="password" class="col-form-label">Password</label> <input type="password"
-                th:field="*{password}" class="form-control" id="password" placeholder="Password">
+                th:field="*{password}" class="form-control" id="password" placeholder="Password" required="true">
             </div>
             <div class="form-group col-md-6">
               <label for="fieldOfStudy" class="col-form-label">Field of study</label> <input type="text"
                 th:field="*{fieldOfStudy}" class="form-control" id="fieldOfStudy" placeholder="Field of study">
             </div>
+            <div class="form-group col-md-6">
+              <label for="grade" class="col-form-label">Grade</label> <input type="number"
+                th:field="*{grade}" class="form-control" id="grade" placeholder="Grade">
+            </div>
           </div>
           <div class="row">
             <div class="col-md-6 mt-4">
-              <input type="submit" class="btn btn-primary" value="Add User"
-                placeholder="Add User">
+              <input type="submit" class="btn btn-primary" value="Save">
             </div>
           </div>
         </form>

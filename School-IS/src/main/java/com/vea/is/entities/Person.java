@@ -2,31 +2,39 @@ package com.vea.is.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vea.is.validators.UniqueLoginName;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@UniqueLoginName
 public abstract class Person extends SchoolEntity implements Serializable {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -4130220608092293563L;
-	
+
 	@NotEmpty
 	protected String name;
 	protected String surname;
 	protected String phone;
 	@Email
 	protected String email;
+	@Column(unique = true)
+	@NotEmpty
+
 	protected String loginName;
+	@JsonIgnore
 	protected String password;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -68,5 +76,5 @@ public abstract class Person extends SchoolEntity implements Serializable {
 	public String toString() {
 		return "Person [name=" + name + ", surname=" + surname + ", phone=" + phone + ", email=" + email + "]";
 	}
-	
+
 }

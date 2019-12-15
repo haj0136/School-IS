@@ -46,8 +46,8 @@
 			<form class="form-signin" id="form-1" action="/login" method="post">
 				<h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
 				<input type="text" name="username" class="form-control"
-					placeholder="Username" autofocus="true" required="true" /><br /> <input
-					type="password" name="password" class="form-control"
+					placeholder="Username" autofocus="true" required="true" /><br />
+					<input type="password" name="password" class="form-control" th:classappend="${param.error}? is-invalid"
 					placeholder="Password" /><br /> <input type="hidden"
 					th:name=${_csrf.parameterName} th:value="${_csrf.token}" /> <input
 					class="btn btn-lg btn-primary btn-block" type="submit"

@@ -1,22 +1,12 @@
 package com.vea.is.security;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,25 +15,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	UserDetailsService userDetailsService;
 
+	/*
     @Autowired
     public void init(AuthenticationManagerBuilder builder) throws Exception {
         PasswordEncoder encoder = getPasswordEncoder();
         builder.inMemoryAuthentication().withUser("marek").password(encoder.encode("test")).roles("ADMIN").and()
                 .withUser("user").password(encoder.encode("test")).roles("USER");
     }
-    
-    /*
+	*/
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	//auth.userDetailsService(userDetailsService);
-    	
+    	auth.userDetailsService(userDetailsService);
     }
-    
-    */
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -56,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and().logout().permitAll().invalidateHttpSession(true)
             .logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/403");
     }
-    
+
     @Bean
     public PasswordEncoder getPasswordEncoder() {return PasswordEncoderFactories.createDelegatingPasswordEncoder();}
 }

@@ -3,10 +3,6 @@ body {
   height: 100%;
 }
 
-body > .container {
-	padding-top: 90px
-}
-
 .form-signin {
 	width: 100%;
 	max-width: 350px;
@@ -45,5 +41,14 @@ body > .container {
 }
 
 .navbar-brand {
-	font-size: 1.2rem;
+	font-size: 1.25rem;
+}
+
+.navbar-nav .active {
+	color: #fff;
+	font-weight: 500;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
