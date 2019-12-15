@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.vea.is.entities.Person;
+import com.vea.is.dao.entities.Person;
 import com.vea.is.services.PersonService;
 
 @Service

@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vea.is.entities.Person;
+import com.vea.is.dao.entities.Person;
 import com.vea.is.services.PersonService;
 
 public class LoginNameValidator implements ConstraintValidator<UniqueLoginName, Person> {

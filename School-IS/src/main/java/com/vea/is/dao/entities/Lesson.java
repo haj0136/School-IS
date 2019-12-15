@@ -1,4 +1,4 @@
-package com.vea.is.entities;
+package com.vea.is.dao.entities;
 
 import java.time.LocalTime;
 import java.util.List;

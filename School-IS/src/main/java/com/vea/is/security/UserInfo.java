@@ -8,9 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.vea.is.entities.Person;
-import com.vea.is.entities.Student;
-import com.vea.is.entities.Teacher;
+import com.vea.is.dao.entities.Person;
+import com.vea.is.dao.entities.Student;
+import com.vea.is.dao.entities.Teacher;
 
 public class UserInfo implements UserDetails {
 

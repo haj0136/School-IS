@@ -7,24 +7,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vea.is.entities.Subject;
-import com.vea.is.repositories.SubjectRepository;
+import com.vea.is.dao.DaoFactory;
+import com.vea.is.dao.ISubjectRepository;
+import com.vea.is.dao.entities.Subject;
 
 @Service
 public class SubjectService {
 
 	private static final Logger log = LoggerFactory.getLogger(SubjectService.class);
 
-	@Autowired
-	private SubjectRepository subjectRepository;
+	private ISubjectRepository subjectRepository;
 
+	@Autowired
+	public SubjectService(DaoFactory factory) {
+		subjectRepository = factory.getSubjectDao();
+	}
 
 	public Subject save(Subject sub) {
-		return subjectRepository.save(sub);
+		long id = subjectRepository.save(sub);
+		return findById(id);
 	}
 
 	public List<Subject> findAll() {
-		return (List<Subject>)subjectRepository.findAll();
+		return subjectRepository.findAll();
 	}
 
 	public Subject findById(long id) {
@@ -32,6 +37,6 @@ public class SubjectService {
 	}
 
 	public void delete(Subject sub) {
-		subjectRepository.delete(sub);
+		subjectRepository.deleteById(sub.getId());
 	}
 }

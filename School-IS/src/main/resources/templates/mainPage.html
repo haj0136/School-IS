@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
-	layout:decorate="~{fragments/layout}">
+	layout:decorate="~{fragments/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>School-IS main page</title>
 </head>
@@ -13,7 +13,7 @@
 			   In this project, Thymeleaf was used as template engine. IS is built on Spring Boot 2.1.x, using Spring Security, JPA, JDBC,
 			   AOP and H2 database.</p>
 			<p>
-				<a class="btn btn-lg btn-primary" href="/persons"
+				<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-lg btn-primary" href="/persons"
 					role="button">View list of users &raquo;</a>
 			</p>
 		</div>

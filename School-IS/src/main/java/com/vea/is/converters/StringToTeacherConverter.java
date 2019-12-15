@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import com.vea.is.entities.Subject;
-import com.vea.is.entities.Teacher;
+import com.vea.is.dao.entities.Subject;
+import com.vea.is.dao.entities.Teacher;
 import com.vea.is.services.SubjectService;
 import com.vea.is.services.TeacherService;
 

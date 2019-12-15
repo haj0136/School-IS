@@ -21,7 +21,6 @@
                                     <th>Surname</th>
                                     <th>Email</th>
                                     <th>Login</th>
-                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,7 +30,6 @@
                                     <td th:text="${person.surname}"></td>
                                     <td th:text="${person.email}"></td>
                                     <td th:text="${person.loginName}"></td>
-                                    <td><a th:href="@{/edit/{id}(id=${person.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit ml-2"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>

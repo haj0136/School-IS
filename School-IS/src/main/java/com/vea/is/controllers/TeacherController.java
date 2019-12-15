@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.vea.is.entities.Person;
-import com.vea.is.entities.Teacher;
+import com.vea.is.dao.entities.Person;
+import com.vea.is.dao.entities.Teacher;
 import com.vea.is.services.TeacherService;
 
 @Controller
@@ -28,6 +28,7 @@ public class TeacherController {
 	@Autowired
 	private TeacherService teacherService;
 
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/teachers")
 	public String index(Model model){
 		var persons = teacherService.findAll();

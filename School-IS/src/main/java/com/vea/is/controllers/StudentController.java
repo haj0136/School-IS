@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.vea.is.entities.Person;
-import com.vea.is.entities.Student;
+import com.vea.is.dao.entities.Lesson;
+import com.vea.is.dao.entities.Person;
+import com.vea.is.dao.entities.Student;
 import com.vea.is.services.StudentService;
 
 @Controller
@@ -59,6 +62,20 @@ public class StudentController {
         model.addAttribute("students", studentService.findAll());
         try {
             response.sendRedirect("/students");
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+        return "listStudents";
+    }
+
+	@PostMapping("/students/addLesson")
+    public String addLesson(@Valid Lesson lesson, BindingResult result, Model model, HttpServletResponse response) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//var person = personService.findByLogin(authentication.getName());
+        //studentService.save(student);
+        model.addAttribute("students", studentService.findAll());
+        try {
+            response.sendRedirect("/profile");
         } catch (IOException e) {
             log.error(e.getMessage());
         }

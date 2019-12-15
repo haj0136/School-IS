@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vea.is.entities.Person;
-import com.vea.is.repositories.PersonRepository;
+import com.vea.is.dao.entities.Person;
+import com.vea.is.dao.repositories.PersonRepository;
 import com.vea.is.services.PersonService;
 
 @RestController

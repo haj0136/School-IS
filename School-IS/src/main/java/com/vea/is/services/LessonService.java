@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
-import com.vea.is.entities.Lesson;
-import com.vea.is.repositories.LessonRepository;
+import com.vea.is.dao.entities.Lesson;
+import com.vea.is.dao.repositories.LessonRepository;
 
 @Service
 @DependsOn("personService")

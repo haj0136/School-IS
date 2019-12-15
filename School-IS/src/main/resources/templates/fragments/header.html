@@ -20,9 +20,9 @@
 					aria-haspopup="true" aria-expanded="false">Users</a>
 					<div class="dropdown-menu"
 						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" th:classappend="${#request.getServletPath() == '/persons' ? 'active' : ''}" href="/persons">People</a>
+						<a class="dropdown-item" th:classappend="${#request.getServletPath() == '/persons' ? 'active' : ''}" href="/persons"  sec:authorize="hasRole('ROLE_ADMIN')">People</a>
 						<a class="dropdown-item" th:classappend="${#request.getServletPath() == '/students' ? 'active' : ''}" href="/students">Students</a> <a
-							class="dropdown-item" th:classappend="${#request.getServletPath() == '/teachers' ? 'active' : ''}" href="/teachers">Teachers</a>
+							class="dropdown-item" th:classappend="${#request.getServletPath() == '/teachers' ? 'active' : ''}" href="/teachers"  sec:authorize="hasRole('ROLE_ADMIN')">Teachers</a>
 					</div></li>
 				<li class="nav-item" th:classappend="${subjectsActiveSettings}"><a class="nav-link" href="/subjects">Subjects</a></li>
 				<li class="nav-item" th:classappend="${lessonsActiveSettings}"><a class="nav-link" href="/lessons">Lessons</a></li>

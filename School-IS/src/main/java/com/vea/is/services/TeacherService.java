@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.vea.is.entities.Teacher;
-import com.vea.is.repositories.TeacherRepository;
+import com.vea.is.dao.entities.Teacher;
+import com.vea.is.dao.repositories.TeacherRepository;
 
 @Service
 public class TeacherService {

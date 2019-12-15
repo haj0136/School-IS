@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.vea.is.entities.Person;
-import com.vea.is.entities.Student;
-import com.vea.is.repositories.StudentRepository;
+import com.vea.is.dao.entities.Person;
+import com.vea.is.dao.entities.Student;
+import com.vea.is.dao.repositories.StudentRepository;
 
 @Service
 public class StudentService {

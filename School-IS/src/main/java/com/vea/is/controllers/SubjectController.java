@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.vea.is.entities.Subject;
+import com.vea.is.dao.entities.Subject;
 import com.vea.is.services.SubjectService;
 
 @Controller

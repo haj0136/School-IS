@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,19 +17,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.vea.is.entities.Person;
-import com.vea.is.entities.Student;
-import com.vea.is.entities.Teacher;
+import com.vea.is.dao.entities.Person;
+import com.vea.is.dao.entities.Student;
+import com.vea.is.dao.entities.Teacher;
+import com.vea.is.services.LessonService;
 import com.vea.is.services.PersonService;
 
 @Controller
 public class PersonController {
 
 	private final PersonService personService;
+	private final LessonService lessonService;
 
 	@Autowired
-	public PersonController(PersonService pr) {
+	public PersonController(PersonService pr, LessonService ls) {
 		this.personService = pr;
+		this.lessonService = ls;
 	}
 
 	@GetMapping("/signup")
@@ -37,6 +41,7 @@ public class PersonController {
 	}
 
 
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/persons")
 	public String index(Model model){
 		var persons = personService.findAll();
@@ -44,13 +49,6 @@ public class PersonController {
 		model.addAttribute("pplActiveSettings","active");
 		return "persons";
 	}
-
-	@GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        Person person = personService.findById(id);
-        model.addAttribute("person", person);
-        return "update-person";
-    }
 
 	@PostMapping("/update/{id}")
     public String updatePerson(@PathVariable("id") long id, @Valid Person person, BindingResult result, Model model) {
@@ -86,6 +84,7 @@ public class PersonController {
 		var person = personService.findByLogin(authentication.getName());
 		if(person instanceof Student) {
 			model.addAttribute("student", person);
+			model.addAttribute("lessons", lessonService.findAll());
 			return "profile-student";
 		} else if (person instanceof Teacher) {
 			model.addAttribute("teacher", person);
