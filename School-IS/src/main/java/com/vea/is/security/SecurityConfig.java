@@ -46,6 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/403");
     }
 
-    @Bean
+    @Bean("passwordEncoder")
     public PasswordEncoder getPasswordEncoder() {return PasswordEncoderFactories.createDelegatingPasswordEncoder();}
 }

@@ -37,7 +37,7 @@ public class TeacherController {
 	}
 
 	@GetMapping("/teachers/edit")
-	public String showAddStudentForm(Teacher t) {
+	public String showAddTeacherForm(Teacher t) {
 		return "add-teacher";
 	}
 

@@ -3,6 +3,11 @@ body {
   height: 100%;
 }
 
+.header {
+	position: relative;
+	z-index: 1000;
+}
+
 .form-signin {
 	width: 100%;
 	max-width: 350px;
@@ -51,4 +56,36 @@ body {
 
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+.welcome {
+	height: 100%;
+	background: #fff;
+	// overflow: hidden;
+	position: relative;
+}
+
+.welcome::before {
+	left: -15vw;
+	top: -30%;
+	background: #fff;
+	background: -moz-linear-gradient(left,#e2e7ef 0,#fff 100%);
+	background: -webkit-linear-gradient(left,#e2e7ef 0,#fff 100%);
+	background: linear-gradient(to right,#e2e7ef 0,#fff 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e7ef', endColorstr='#ffffff', GradientType=1);
+}
+
+.welcome::after, .welcome::before {
+	content: '';
+	position: absolute;
+	width: 50vw;
+	height: 80vh;
+	transform: rotate(-25deg);
+	z-index: 1;
+	box-sizing: border-box;
+}
+
+.jumbotron-wrapper {
+	z-index: 2;
+	position: inherit;	
 }

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +68,6 @@ public class PersonController {
 	public String deleteUser(@PathVariable("id") long id, Model model, HttpServletResponse response, HttpServletRequest request) {
 		Person person = personService.findById(id);
 		personService.delete(person);
-		var test = request.getRequestURI();
 	    try {
 	    	if (person instanceof Student) {
 				response.sendRedirect("/students");
@@ -77,5 +78,19 @@ public class PersonController {
             System.out.println(e.getMessage());
         }
 	    return "persons";
+	}
+
+	@GetMapping("/profile")
+	public String userProfile(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		var person = personService.findByLogin(authentication.getName());
+		if(person instanceof Student) {
+			model.addAttribute("student", person);
+			return "profile-student";
+		} else if (person instanceof Teacher) {
+			model.addAttribute("teacher", person);
+			return "profile-teacher";
+		}
+		return "mainPage";
 	}
 }

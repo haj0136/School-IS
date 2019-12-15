@@ -19,11 +19,19 @@ public class SubjectService {
 	private SubjectRepository subjectRepository;
 
 
-	public Subject save(Subject person) {
-		return subjectRepository.save(person);
+	public Subject save(Subject sub) {
+		return subjectRepository.save(sub);
 	}
 
 	public List<Subject> findAll() {
 		return (List<Subject>)subjectRepository.findAll();
+	}
+
+	public Subject findById(long id) {
+		return subjectRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid subject Id:" + id));
+	}
+
+	public void delete(Subject sub) {
+		subjectRepository.delete(sub);
 	}
 }

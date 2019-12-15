@@ -19,7 +19,7 @@
                                     <th>Name</th>
                                     <th>Code</th>
                                     <th>Credit</th>
-                                    <th>Optional</th>
+                                    <th>Optionality</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -30,13 +30,13 @@
                                     <td th:text="${sub.code}"></td>
                                     <td th:text="${sub.credits}"></td>
                                     <td th:text="${sub.optionality}"></td>
-                                    <td><a th:href="@{/edit/{id}(id=${sub.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit ml-2"></i></a></td>
-                                    <td><a th:href="@{/delete/{id}(id=${sub.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-times ml-2"></i></a></td>
+                                    <td><a th:href="@{/subjects/edit/{id}(id=${sub.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a th:href="@{/subjects/delete/{id}(id=${sub.id})}" class="btn btn-primary btn-sm"><i class="fas fa-user-times ml-2"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>      
-                    <p class="my-5"><a href="/signup" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
+                    <p class="my-5"><a href="/subjects/edit" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p>
                 </div>
             </div>
         </div>

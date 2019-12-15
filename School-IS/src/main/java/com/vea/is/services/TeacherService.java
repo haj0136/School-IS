@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.vea.is.entities.Person;
 import com.vea.is.entities.Teacher;
 import com.vea.is.repositories.TeacherRepository;
 
@@ -33,7 +32,7 @@ public class TeacherService {
 		return (List<Teacher>)teacherRepository.findAll();
 	}
 
-	public Person findById(long id) {
+	public Teacher findById(long id) {
 		return teacherRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid teacher Id:" + id));
 	}
 }

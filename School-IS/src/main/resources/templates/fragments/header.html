@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<header th:fragment="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="header">
 	<!-- Static navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-4 shadow">
 		<a class="navbar-brand font-weight-normal" href="/">School information system</a>
@@ -25,12 +25,14 @@
 							class="dropdown-item" th:classappend="${#request.getServletPath() == '/teachers' ? 'active' : ''}" href="/teachers">Teachers</a>
 					</div></li>
 				<li class="nav-item" th:classappend="${subjectsActiveSettings}"><a class="nav-link" href="/subjects">Subjects</a></li>
+				<li class="nav-item" th:classappend="${lessonsActiveSettings}"><a class="nav-link" href="/lessons">Lessons</a></li>
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown"><a class="nav-link text-white dropdown-toggle"
 					href="#" th:text="${#authentication.principal.realName}" data-toggle="dropdown">User name</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink-2">
 					<a class="dropdown-item" href="/logout">Logout</a>
+					<a class="dropdown-item" href="/profile">Profile</a>
 					</div>
 					</li>
 				<li class="nav-item"><a class="nav-link" href="#"><i
