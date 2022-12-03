@@ -1,1 +1,2 @@
-# School-IS Spring boot
+# School-IS
+School project - Spring boot + Thymeleaf
