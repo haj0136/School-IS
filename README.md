@@ -9,3 +9,4 @@ Goaf of this project was to learn Spring Boot
 - Maven
 - REST
 - Services
+- Security
